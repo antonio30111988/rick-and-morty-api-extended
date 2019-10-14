@@ -1,0 +1,111 @@
+/**
+ * @OA\GET(
+ *   path="/[ResourcePath]",
+ *   tags={"[TagName]"},
+ *   summary="Get all [ModelName]",
+ *
+ *   @OA\Response(response=200, description="Json response",
+ *     @OA\JsonContent(
+ *      type="array",
+ *      @OA\Items(ref="#/components/schemas/[ModelName]")
+ *     )
+ *   ),
+ *   @OA\Response(response=401, description="", @OA\JsonContent(ref="#/components/schemas/UnAuthorised"))
+ * )
+ */
+
+/**
+ * @OA\GET(
+ *   path="/[ResourcePath]/{id}",
+ *   tags={"[TagName]"},
+ *   summary="Get [ModelName] by id",
+ *   @OA\Parameter(name="id", in="path", description="The ID of the [ModelName]", required=true,
+ *     @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *     )
+ *   ),
+ *   @OA\Response(response=200, description="Json response", @OA\JsonContent(ref="#/components/schemas/[ModelName]")),
+ *   @OA\Response(response=401, description="Unauthorised", @OA\JsonContent(ref="#/components/schemas/UnAuthorised")),
+ *   @OA\Response(response=404, description="[ModelName] not found", @OA\JsonContent(ref="#/components/schemas/NotFound"))
+ * )
+ */
+
+/**
+ * @OA\POST(
+ *     path="/[ResourcePath]",
+ *     tags={"[TagName]"},
+ *     summary="Creates a new [ModelName] with the data",
+ *     @OA\RequestBody(
+ *         description="Input data format",
+ *         @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 type="object",
+ *                 @OA\Property(
+ *                     property="name",
+ *                     description="Name of the [ModelName]",
+ *                     type="string",
+ *                 ),
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(response=200, description="Json response", @OA\JsonContent(ref="#/components/schemas/[ModelName]")),
+ *     @OA\Response(response=400, description="BadRequest", @OA\JsonContent(ref="#/components/schemas/BadRequest")),
+ *     @OA\Response(response=401, description="Unauthorised", @OA\JsonContent(ref="#/components/schemas/UnAuthorised"))
+ * )
+ */
+
+/**
+ * @OA\PUT(
+ *     path="/[ResourcePath]/{id}",
+ *     tags={"[TagName]"},
+ *     summary="Updates a [ModelName] with new data",
+ *     @OA\Parameter(
+ *         name="[ModelName] id",
+ *         in="path",
+ *         description="ID of [ModelName] that needs to be updated",
+ *         required=true,
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64"
+ *         )
+ *     ),
+ *     @OA\RequestBody(
+ *         description="Input data format",
+ *         @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 type="object",
+ *                 @OA\Property(
+ *                     property="name",
+ *                     description="Updated name of the [ModelName]",
+ *                     type="string",
+ *                 )
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(response=200, description="Json response", @OA\JsonContent(ref="#/components/schemas/[ModelName]")),
+ *     @OA\Response(response=400, description="BadRequest", @OA\JsonContent(ref="#/components/schemas/BadRequest")),
+ *     @OA\Response(response=401, description="Unauthorised", @OA\JsonContent(ref="#/components/schemas/UnAuthorised")),
+ *     @OA\Response(response=404, description="[ModelName] not found", @OA\JsonContent(ref="#/components/schemas/NotFound"))
+ * )
+ */
+
+ /**
+  * @OA\DELETE(
+  *   path="/[ResourcePath]/{id}",
+  *   tags={"[TagName]"},
+  *   summary="Delete [ModelName] by id",
+  *   @OA\Parameter(name="id", in="path", description="The ID of the [ModelName]", required=true,
+  *     @OA\Schema(
+  *             type="integer",
+  *             format="int64"
+  *     )
+  *   ),
+  *   @OA\Response(response=200, description="Json response"),
+  *   @OA\Response(response=401, description="Unauthorised", @OA\JsonContent(ref="#/components/schemas/UnAuthorised")),
+  *   @OA\Response(response=404, description="[ModelName] not found", @OA\JsonContent(ref="#/components/schemas/NotFound"))
+  * )
+  */
+

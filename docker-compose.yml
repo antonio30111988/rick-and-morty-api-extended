@@ -1,0 +1,27 @@
+version: "3.3"
+
+services:
+  php_fpm:
+      build: .
+      container_name: rick_and_morty_api_clients_php_fpm
+      working_dir: /usr/share/nginx/rick-and-morty-api-clients
+      networks:
+        - rick_and_morty_api_clients
+      volumes:
+          - ./:/usr/share/nginx/rick-and-morty-api-clients
+
+  nginx:
+      image: nginx:1.15
+      container_name: rick_and_morty_api_clients_nginx
+      working_dir: /usr/share/nginx/rick-and-morty-api-clients
+      networks:
+        - rick_and_morty_api_clients
+      ports:
+          - "8080:80"
+      volumes:
+          - ./:/usr/share/nginx/blog
+          - ./docker/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+
+networks:
+  rick_and_morty_api_clients:
+    driver: bridge

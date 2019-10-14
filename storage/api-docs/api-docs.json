@@ -1,0 +1,560 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Rick and Morty API Extended",
+        "description": "A Restful and GraphQL APIs for Rick and Morty",
+        "version": "v1"
+    },
+    "servers": [
+        {
+            "url": "http://api-clients.rick-and-marty.local:8080",
+            "description": "Rick and Morty API Extended"
+        }
+    ],
+    "paths": {
+        "/api/v1/character/{id}": {
+            "get": {
+                "tags": [
+                    "Character Overview"
+                ],
+                "summary": "Get character by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the character",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Json response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Character"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorised",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnAuthorised"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Permission not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFound"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/episode/{id}/characters": {
+            "get": {
+                "tags": [
+                    "Episode Characters"
+                ],
+                "summary": "Get episode by ID characters",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the episode",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Json response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EpisodeCharacter"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorised",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnAuthorised"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Permission not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFound"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/location/{id}/characters": {
+            "get": {
+                "tags": [
+                    "Location characters"
+                ],
+                "summary": "Get location by ID characters",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the location",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Json response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LocationCharacter"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorised",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnAuthorised"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Permission not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFound"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/locations/characters/filter/dimension": {
+            "post": {
+                "tags": [
+                    "Location Dimension Characters"
+                ],
+                "summary": "Store invoice item",
+                "requestBody": {
+                    "description": "Input data format"
+                },
+                "responses": {
+                    "200": {
+                        "description": "Json response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LocationDimensionCharacter"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnAuthorised"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/graphql/v1/character/{id}": {
+            "get": {
+                "tags": [
+                    "Character Overview"
+                ],
+                "summary": "Get character by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the character",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Json response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Character"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorised",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnAuthorised"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Permission not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFound"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/graphql/v1/episode/{id}/characters": {
+            "get": {
+                "tags": [
+                    "Episode Characters"
+                ],
+                "summary": "Get episode by ID characters",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the episode",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Json response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EpisodeCharacter"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorised",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnAuthorised"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Permission not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFound"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/graphql/v1/location/{id}/characters": {
+            "get": {
+                "tags": [
+                    "Location characters"
+                ],
+                "summary": "Get location by ID characters",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the location",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Json response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LocationCharacter"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorised",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnAuthorised"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Permission not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFound"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/graphql/v2/locations/characters/filter/dimension": {
+            "post": {
+                "tags": [
+                    "Location Dimension Characters"
+                ],
+                "summary": "Store invoice item",
+                "requestBody": {
+                    "description": "Input data format"
+                },
+                "responses": {
+                    "200": {
+                        "description": "Json response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LocationDimensionCharacter"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnAuthorised"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Character": {
+                "properties": {
+                    "id": {
+                        "description": "Permission ID",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Permission Name",
+                        "type": "string"
+                    },
+                    "guard_name": {
+                        "description": "Permission ID",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "EpisodeCharacter": {
+                "properties": {
+                    "id": {
+                        "description": "Permission ID",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Permission Name",
+                        "type": "string"
+                    },
+                    "guard_name": {
+                        "description": "Permission ID",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "BadRequest": {
+                "properties": {
+                    "error": {
+                        "properties": {
+                            "code": {
+                                "description": "Error code",
+                                "type": "integer",
+                                "default": "400"
+                            },
+                            "message": {
+                                "description": "Error Message",
+                                "type": "string"
+                            },
+                            "error_details": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "NotFound": {
+                "properties": {
+                    "error": {
+                        "properties": {
+                            "code": {
+                                "description": "Error code",
+                                "type": "integer",
+                                "default": "404"
+                            },
+                            "message": {
+                                "description": "Error Message",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "UnAuthorised": {
+                "properties": {
+                    "error": {
+                        "properties": {
+                            "code": {
+                                "description": "Error code",
+                                "type": "integer",
+                                "default": "401"
+                            },
+                            "message": {
+                                "description": "Error Message",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "UndefinedError": {
+                "properties": {
+                    "error": {
+                        "properties": {
+                            "code": {
+                                "description": "Error code",
+                                "type": "integer",
+                                "default": "500"
+                            },
+                            "message": {
+                                "description": "Error Message",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "GetLocationDimensionCharacter": {
+                "required": [
+                    "dimension"
+                ],
+                "properties": {
+                    "dimension": {
+                        "description": "Location dimension",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "LocationCharacter": {
+                "properties": {
+                    "id": {
+                        "description": "Permission ID",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Permission Name",
+                        "type": "string"
+                    },
+                    "guard_name": {
+                        "description": "Permission ID",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "LocationDimensionCharacter": {
+                "properties": {
+                    "id": {
+                        "description": "Permission ID",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Permission Name",
+                        "type": "string"
+                    },
+                    "guard_name": {
+                        "description": "Permission ID",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}

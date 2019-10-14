@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: rick-and-morty-api-clients-php-fpm-ingress
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  backend:
+    serviceName: default-http-server
+    servicePort: 80
+  rules:
+  - host: api-clients.rick-and-marty.local
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: rick-and-morty-api-clients-php-fpm
+          servicePort: 80

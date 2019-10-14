@@ -1,0 +1,222 @@
+{
+	"info": {
+		"name": "RICK AND MORTY API EXTENDED",
+		"_postman_id": "c2209032-508f-dea3-9880-45802fd906dd",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GraphQL",
+			"description": "",
+			"item": [
+				{
+					"name": "Show all characters that exist (or are last seen) in a given dimension",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"filter\":  { \n\t\t\"dimension\" : \"Testicle Monster Dimension\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{base_uri}}/graphql/v1/locations/characters/filter/dimension",
+							"host": [
+								"{{base_uri}}"
+							],
+							"path": [
+								"graphql",
+								"v1",
+								"locations",
+								"characters",
+								"filter",
+								"dimension"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Show all characters that exist (or are last seen) at a given location",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_uri}}/graphql/v1/location/2/characters",
+							"host": [
+								"{{base_uri}}"
+							],
+							"path": [
+								"graphql",
+								"v1",
+								"location",
+								"2",
+								"characters"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Show all characters that partake in a given episode",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_uri}}/graphql/v1/episode/7/characters",
+							"host": [
+								"{{base_uri}}"
+							],
+							"path": [
+								"graphql",
+								"v1",
+								"episode",
+								"7",
+								"characters"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Showing all information of a character (Name, species, gender, last location, dimension, etc)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_uri}}/graphql/v1/character/7",
+							"host": [
+								"{{base_uri}}"
+							],
+							"path": [
+								"graphql",
+								"v1",
+								"character",
+								"7"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "REST API",
+			"description": "",
+			"item": [
+				{
+					"name": "Show all characters that exist (or are last seen) in a given dimension",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"filter\":  { \n\t\t\"dimension\" : \"Testicle Monster Dimension\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{base_uri}}/api/v1/locations/characters/filter/dimension",
+							"host": [
+								"{{base_uri}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"locations",
+								"characters",
+								"filter",
+								"dimension"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Show all characters that exist (or are last seen) at a given location",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_uri}}/api/v1/location/2/characters",
+							"host": [
+								"{{base_uri}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"location",
+								"2",
+								"characters"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Show all characters that partake in a given episode",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_uri}}/api/v1/episode/7/characters",
+							"host": [
+								"{{base_uri}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"episode",
+								"7",
+								"characters"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Showing all information of a character (Name, species, gender, last location, dimension, etc)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_uri}}/api/v1/character/7",
+							"host": [
+								"{{base_uri}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"character",
+								"7"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
