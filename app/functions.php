@@ -1,21 +1,22 @@
 <?php
 
-use Illuminate\Routing\Router;
+use Illuminate\Http\Request;
+use Carbon\Carbon;
 
-if (!function_exists('generateCRUDRoutes')) {
+if (!function_exists('getRequestData')) {
     try {
         /**
-         * @param Router  $router
-         * @param string $basePath
-         * @param string $controller
+         * @param Request $request
+         * @return string
          */
-        function generateCRUDRoutes(Router $router, string $basePath, string $controller)
+        function getRequestData(Request $request)
         {
-            $router->get($basePath, $controller . '@index');
-            $router->get($basePath . '/{id}', $controller . '@show');
-            $router->delete($basePath . '/{id}', $controller . '@destroy');
-            $router->put($basePath . '/{id}', $controller . '@update');
-            $router->post($basePath, $controller . '@store');
+            return  'request time: ' . $this->logInfo(Carbon::now()->toDateTimeString()) . PHP_EOL .
+                    'request User Agent: ' . $request->header('User-Agent') . PHP_EOL .
+                    'request IP: ' . $request->getClientIp() . PHP_EOL .
+                    'end request IP: ' . last($request->getClientIps()) . PHP_EOL .
+                    'request url: ' . $request->url() . PHP_EOL .
+                    'request data: ' . json_encode($request);
         }
     } catch (\Exception $ex) {
     }

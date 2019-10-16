@@ -1,12 +1,12 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Http\Controllers\GraphQL;
 
 use App\GraphQL\Contracts\GraphQlClientProvider;
 use App\GraphQL\Queries\GetLocationDimensionCharactersQuery;
-use Carbon\Carbon;
 use GraphQL\Exception\QueryError;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 
 class LocationDimensionCharactersController extends GraphQLController
@@ -23,8 +23,8 @@ class LocationDimensionCharactersController extends GraphQLController
         Request $request,
         GraphQlClientProvider $client,
         GetLocationDimensionCharactersQuery $queryBuilder
-    ): JsonResponse {
-
+    ): JsonResponse
+    {
         try {
             $results = $client->runQuery(
                 $queryBuilder->query(),
@@ -33,12 +33,12 @@ class LocationDimensionCharactersController extends GraphQLController
             );
         } catch (QueryError $exception) {
             $this->logError($exception->getErrorDetails());
-            exit;
+            return $this->graphQlErrorResponse(
+                $exception,
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
         }
         $results->reformatResults(true);
-
-        $this->logInfo(Carbon::now()->toDateTimeString());
-
         return response()->json($results->getData());
     }
 }

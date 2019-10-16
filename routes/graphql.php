@@ -11,7 +11,11 @@
 |
 */
 
-Route::group(['prefix' => 'v1', 'as'=>'graphql.'], function () {
+Route::group([
+    'prefix' => 'v1',
+    'middleware' => 'log-graphql-requests',
+    'as'=>'graphql.'
+], function () {
 
     // Showing all information of a character (Name, species, gender, last location, dimension, etc)
     Route::get(

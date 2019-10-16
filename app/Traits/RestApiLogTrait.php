@@ -21,8 +21,9 @@ trait RestApiLogTrait
      */
     public function logError(\Exception $exception): void
     {
+        //dd("dd");
         RestApiLogger::initializeLogger()->error(
-            'Error occurred: ' . $exception->getMessage() . ' ' . $exception->getTrace()
+            'Error occurred: ' . $exception->getMessage()
         );
     }
 }

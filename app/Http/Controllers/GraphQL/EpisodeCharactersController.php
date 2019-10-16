@@ -1,10 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Http\Controllers\GraphQL;
 
 use App\GraphQL\Contracts\GraphQlClientProvider;
 use App\GraphQL\Queries\GetEpisodeCharactersQuery;
-use Carbon\Carbon;
+use Illuminate\Http\Response;
 use GraphQL\Exception\QueryError;
 use Illuminate\Http\JsonResponse;
 
@@ -22,7 +22,8 @@ class EpisodeCharactersController extends GraphQLController
         int $id,
         GraphQlClientProvider $client,
         GetEpisodeCharactersQuery $queryBuilder
-    ): JsonResponse {
+    ): JsonResponse
+    {
         try {
             $results = $client->runQuery(
                 $queryBuilder->query(),
@@ -31,11 +32,12 @@ class EpisodeCharactersController extends GraphQLController
             );
         } catch (QueryError $exception) {
             $this->logError($exception->getErrorDetails());
-            exit;
+            return $this->graphQlErrorResponse(
+                $exception,
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
         }
         $results->reformatResults(true);
-
-        $this->logInfo(Carbon::now()->toDateTimeString());
 
         return response()->json($results->getData());
     }

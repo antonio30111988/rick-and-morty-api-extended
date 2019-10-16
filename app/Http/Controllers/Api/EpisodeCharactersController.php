@@ -1,42 +1,41 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
-use App\GraphQL\Contracts\GraphQlClientProvider;
-use App\GraphQL\Queries\GetEpisodeCharactersQuery;
 use App\Http\Controllers\GraphQL\RestApiController;
-use Carbon\Carbon;
-use Illuminate\Http\JsonResponse;
+use App\Http\Resources\EpisodeCharacters;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Response;
+use RickAndMortyApiClient\Contracts\Api\RickAndMorty\Characters\CharacterProvider;
+use RickAndMortyApiClient\Contracts\Api\RickAndMorty\Episodes\EpisodeProvider;
 
 class EpisodeCharactersController extends RestApiController
 {
     /**
-     *
-     * @param int                       $id
-     * @param GraphQlClientProvider     $client
-     * @param GetEpisodeCharactersQuery $queryBuilder
-     *
-     * @return JsonResponse
+     * @param int $id
+     * @param EpisodeProvider $episodeService
+     * @return JsonResource
      */
     public function __invoke(
         int $id,
-        GraphQlClientProvider $client,
-        GetEpisodeCharactersQuery $queryBuilder
-    ): JsonResponse {
+        EpisodeProvider $episodeService,
+        CharacterProvider $characterService
+    ): JsonResource
+    {
         try {
-            $results = $client->runQuery(
-                $queryBuilder->query(),
-                true,
-                ['id' => $id]
-            );
+            $episode = $episodeService->show($id);
+
+            /** @var Collection $characters */
+            $episodeCharacters = $characterService->all(['ids' => $episode->getCharacterIds()]);
+            return response()->json($episodeCharacters);
+
+            return new EpisodeCharacters($episode);
         } catch (\Exception $exception) {
             $this->logError($exception);
-            exit;
+            return $this->errorResponse(
+                $exception,
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
         }
-        $results->reformatResults(true);
-
-        $this->logInfo(Carbon::now()->toDateTimeString());
-
-        return response()->json($results->getData());
     }
 }

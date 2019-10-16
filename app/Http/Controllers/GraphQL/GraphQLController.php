@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\GraphQL;
 
+use App\Http\Controllers\Controller;
 use App\Traits\GraphQlLogTrait;
-use Illuminate\Routing\Controller as BaseController;
 
-class GraphQLController extends BaseController
+class GraphQLController extends Controller
 {
     use GraphQlLogTrait;
 }

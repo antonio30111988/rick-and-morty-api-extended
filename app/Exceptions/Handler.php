@@ -2,11 +2,17 @@
 
 namespace App\Exceptions;
 
+use App\Http\Controllers\Api\Traits\ErrorResponse;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
+use RickAndMortyApiClient\Services\Api\Exception\ErrorCodes;
 
 class Handler extends ExceptionHandler
 {
+    use ErrorResponse;
+
     /**
      * A list of the exception types that are not reported.
      *
@@ -27,10 +33,9 @@ class Handler extends ExceptionHandler
     ];
 
     /**
-     * Report or log an exception.
-     *
-     * @param  \Exception  $exception
-     * @return void
+     * @param Exception $exception
+     * @return mixed|void
+     * @throws Exception
      */
     public function report(Exception $exception)
     {
@@ -38,14 +43,17 @@ class Handler extends ExceptionHandler
     }
 
     /**
-     * Render an exception into an HTTP response.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param Exception $e
+     * @return \Illuminate\Http\JsonResponse|Response|\Symfony\Component\HttpFoundation\Response
      */
-    public function render($request, Exception $exception)
+    public function render($request, Exception $e)
     {
-        return parent::render($request, $exception);
+        $rendered = parent::render($request, $e);
+
+        if ($e instanceof ValidationException) {
+            return $this->errorResponse($e, Response::HTTP_UNPROCESSABLE_ENTITY, ErrorCodes::VALIDATION_ERROR);
+        }
+        return $this->errorResponse($e, $rendered->getStatusCode());
     }
 }
