@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 /**
  * @OA\Get(
- *   path="/api/v1/episode/{id}/characters",
+ *   path="/api/v1/episodes/{id}/characters",
  *   tags={"Episode Characters"},
  *   summary="Get episode by ID characters",
  *   @OA\Parameter(name="id", in="path", description="The ID of the episode", required=true,

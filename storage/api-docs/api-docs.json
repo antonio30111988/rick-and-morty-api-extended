@@ -12,7 +12,7 @@
         }
     ],
     "paths": {
-        "/api/v1/character/{id}": {
+        "/api/v1/characters/{id}": {
             "get": {
                 "tags": [
                     "Character Overview"
@@ -64,7 +64,7 @@
                 }
             }
         },
-        "/api/v1/episode/{id}/characters": {
+        "/api/v1/episodes/{id}/characters": {
             "get": {
                 "tags": [
                     "Episode Characters"
@@ -116,7 +116,7 @@
                 }
             }
         },
-        "/api/v1/location/{id}/characters": {
+        "/api/v1/locations/{id}/characters": {
             "get": {
                 "tags": [
                     "Location characters"

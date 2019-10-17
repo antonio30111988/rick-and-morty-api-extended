@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 /**
  * @OA\Get(
- *   path="/api/v1/character/{id}",
+ *   path="/api/v1/characters/{id}",
  *   tags={"Character Overview"},
  *   summary="Get character by id",
  *   @OA\Parameter(name="id", in="path", description="The ID of the character", required=true,

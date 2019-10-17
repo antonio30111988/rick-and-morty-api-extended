@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 /**
  * @OA\Get(
- *   path="/api/v1/location/{id}/characters",
+ *   path="/api/v1/locations/{id}/characters",
  *   tags={"Location characters"},
  *   summary="Get location by ID characters",
  *   @OA\Parameter(name="id", in="path", description="The ID of the location", required=true,
