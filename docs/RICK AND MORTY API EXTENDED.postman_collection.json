@@ -128,7 +128,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"filter\":  { \n\t\t\"dimension\" : \"Testicle Monster Dimension\"\n\t}\n}"
+							"raw": "{\n\t\"dimension\" : \"Testicle Monster Dimension\"\n}"
 						},
 						"url": {
 							"raw": "{{base_uri}}/api/v1/locations/characters/filter/dimension",
@@ -155,14 +155,14 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "{{base_uri}}/api/v1/location/2/characters",
+							"raw": "{{base_uri}}/api/v1/locations/2/characters",
 							"host": [
 								"{{base_uri}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"location",
+								"locations",
 								"2",
 								"characters"
 							]
@@ -178,14 +178,14 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "{{base_uri}}/api/v1/episode/7/characters",
+							"raw": "{{base_uri}}/api/v1/episodes/7/characters",
 							"host": [
 								"{{base_uri}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"episode",
+								"episodes",
 								"7",
 								"characters"
 							]
@@ -201,15 +201,159 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "{{base_uri}}/api/v1/character/7",
+							"raw": "{{base_uri}}/api/v1/characters/7",
 							"host": [
 								"{{base_uri}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"character",
+								"characters",
 								"7"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "RICK AND MORTY API PUBLIC",
+			"description": "",
+			"item": [
+				{
+					"name": "GET CHARACTER",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"filter\":  { \n\t\t\"dimension\" : \"Testicle Monster Dimension\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "https://rickandmortyapi.com/api/character/1",
+							"protocol": "https",
+							"host": [
+								"rickandmortyapi",
+								"com"
+							],
+							"path": [
+								"api",
+								"character",
+								"1"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GET CHARACTERS",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"filter\":  { \n\t\t\"dimension\" : \"Testicle Monster Dimension\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "https://rickandmortyapi.com/api/character/1",
+							"protocol": "https",
+							"host": [
+								"rickandmortyapi",
+								"com"
+							],
+							"path": [
+								"api",
+								"character",
+								"1"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GET LOCATION DIMENSION",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "https://rickandmortyapi.com/api/location/?dimension=Testicle Monster Dimension",
+							"protocol": "https",
+							"host": [
+								"rickandmortyapi",
+								"com"
+							],
+							"path": [
+								"api",
+								"location",
+								""
+							],
+							"query": [
+								{
+									"key": "dimension",
+									"value": "Testicle Monster Dimension\n",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GET LOCATION",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "https://rickandmortyapi.com/api/location/2",
+							"protocol": "https",
+							"host": [
+								"rickandmortyapi",
+								"com"
+							],
+							"path": [
+								"api",
+								"location",
+								"2"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GET EPISODE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "https://rickandmortyapi.com/api/episode/2",
+							"protocol": "https",
+							"host": [
+								"rickandmortyapi",
+								"com"
+							],
+							"path": [
+								"api",
+								"episode",
+								"2"
 							]
 						},
 						"description": ""
