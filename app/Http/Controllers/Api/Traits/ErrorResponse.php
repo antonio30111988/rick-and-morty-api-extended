@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\Traits;
 use Exception;
 use GraphQL\Exception\QueryError;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Resources\Json\JsonResource;
 
 trait ErrorResponse
 {
@@ -14,7 +13,7 @@ trait ErrorResponse
      * @param int       $httpCode
      * @param int       $internalErrorCode
      *
-     * @return JsonResource
+     * @return JsonResponse
      */
     protected function errorResponse(Exception $e, int $httpCode, int $internalErrorCode = 9999)
     {

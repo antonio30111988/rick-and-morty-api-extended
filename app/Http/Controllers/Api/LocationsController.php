@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\GraphQL\RestApiController;
 use App\Http\Requests\GetDimensionCharacters;
-use App\Http\Resources\CharacterCollection;
-use App\Http\Resources\DimensionCharacters;
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use RickAndMortyApiClient\Contracts\Api\RickAndMorty\Characters\CharacterProvider;
@@ -37,25 +35,18 @@ class LocationsController extends RestApiController
 
     /**
      * @param int $id
-     * @return JsonResource
+     * @return JsonResponse
      */
-    public function getLocationCharacters(int $id)
+    public function getLocationCharacters(int $id): JsonResponse
     {
         try {
             /** @var Location $location */
             $location = $this->locationService->show($id);
-         //   $characterIds = $location->getCharacterIds();
-//            $characterIds = collect($location->getResidents())->map(function ($item, $key) {
-//                return (int)str_replace("https://rickandmortyapi.com/api/character/", "", $item);
-//            })->toArray();
 
             /** @var Collection $characters */
             $locationCharacters = $this->characterService->all(['ids' => $location->getCharacterIds()]);
 
             return response()->json($locationCharacters);
-
-            return CharacterCollection::collection($location->getCharacters());
-           // return new LocationCharacters($location->getCharacters());
         } catch (\Exception $exception) {
             $this->logError($exception);
             return $this->errorResponse(
@@ -67,16 +58,19 @@ class LocationsController extends RestApiController
 
     /**
      * @param GetDimensionCharacters $request
-     * @return JsonResource
+     * @return JsonResponse
      */
-    public function getLocationDimensionCharacters(GetDimensionCharacters $request): JsonResource
+    public function getLocationDimensionCharacters(GetDimensionCharacters $request): JsonResponse
     {
         try {
-            $results = $this->locationService->getLocationByDimension([
+            $dimensions = $this->locationService->getLocationByDimension([
                 'filters' => $request->toArray()
             ]);
 
-            return new DimensionCharacters($results[0]);
+            /** @var Collection $characters */
+            $dimensionCharacters = $this->characterService->all(['ids' => $dimensions[0]->getCharacterIds()]);
+
+            return response()->json($dimensionCharacters);
         } catch (\Exception $exception) {
             $this->logError($exception);
             return $this->errorResponse(

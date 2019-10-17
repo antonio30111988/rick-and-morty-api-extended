@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\GraphQL\RestApiController;
-use App\Http\Resources\EpisodeCharacters;
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use RickAndMortyApiClient\Contracts\Api\RickAndMorty\Characters\CharacterProvider;
 use RickAndMortyApiClient\Contracts\Api\RickAndMorty\Episodes\EpisodeProvider;
@@ -14,22 +13,22 @@ class EpisodeCharactersController extends RestApiController
     /**
      * @param int $id
      * @param EpisodeProvider $episodeService
-     * @return JsonResource
+     * @param CharacterProvider $characterService
+     * @return JsonResponse
      */
     public function __invoke(
         int $id,
         EpisodeProvider $episodeService,
         CharacterProvider $characterService
-    ): JsonResource
+    ): JsonResponse
     {
         try {
             $episode = $episodeService->show($id);
 
             /** @var Collection $characters */
             $episodeCharacters = $characterService->all(['ids' => $episode->getCharacterIds()]);
-            return response()->json($episodeCharacters);
 
-            return new EpisodeCharacters($episode);
+            return response()->json($episodeCharacters);
         } catch (\Exception $exception) {
             $this->logError($exception);
             return $this->errorResponse(

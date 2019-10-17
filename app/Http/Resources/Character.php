@@ -21,9 +21,9 @@ class Character extends JsonResource
             'gender' => $this->getGender(),
             'origin' => $this->getOrigin(),
             'location' => $this->getLocation(),
-            'image' => $this->Image(),
-            'episode' => $this->getEpisode(),
-            'url' => $this->getResidents()
+            'image' => $this->getImage(),
+            'episodes' => $this->getEpisodes(),
+            'url' => $this->getUrl()
         ];
     }
 
